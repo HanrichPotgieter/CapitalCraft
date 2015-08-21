@@ -77,6 +77,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
         controller: 'AccountCtrl'
       }
     }
+  })
+
+  .state('list', {
+    url: '/list',
+    views: {
+      'list': {
+        templateUrl: 'templates/list.html',
+        controller: 'ListCtrl'
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback
