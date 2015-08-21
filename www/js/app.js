@@ -79,10 +79,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
     }
   })
 
-  .state('list', {
+  .state('tab.list', {
     url: '/list',
     views: {
-      'list': {
+      'tab-list': {
         templateUrl: 'templates/list.html',
         controller: 'ListCtrl'
       }

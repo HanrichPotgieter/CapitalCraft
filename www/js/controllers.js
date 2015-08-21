@@ -21,8 +21,16 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('ListCtrl', function($scope, $stateParams, Chats) {
-  
+.controller('ListCtrl', function($scope, $stateParams, Chats, Items) {
+  $scope.items = Items;
+  $scope.addItem = function() {
+    var name = prompt("What do you need to buy?");
+    if (name) {
+      $scope.items.$add({
+        "name": name
+      });
+    }
+  };
 })
 
 .controller('AccountCtrl', function($scope) {

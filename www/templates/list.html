@@ -1,7 +1,14 @@
-<body ng-app="starter" ng-controller="ListCtrl">
-    <ion-header-bar class="top">
-      <h1 class="title">Items</h1>
-      <button class="button button-icon ion-plus" ng-click="addItem()">
-      </button>
-    </ion-header-bar>
-</body>
+<ion-view view-title="list">
+  <ion-content>
+	<ion-header-bar class="top">
+	    <h1 class="title">Items</h1>
+	    <button class="button button-icon ion-plus" ng-click="addItem()">
+	    </button>
+	</ion-header-bar>
+	<ion-list>
+	    <ion-item ng-repeat="item in items">
+	      {{item.name}}
+	    </ion-item>
+  	</ion-list>
+  </ion-content>
+</ion-view>
