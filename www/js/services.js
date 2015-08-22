@@ -33,8 +33,8 @@ angular.module('starter.services', [])
       return  $firebaseArray(itemsRef);
     },
     get : function(beerId) {
-      var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/beers");
-      return itemsRef.child(beerId);
+      var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/beers/"+beerId);
+      return itemsRef;
     },
     remove : function(beerId) {
       var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/beers");
