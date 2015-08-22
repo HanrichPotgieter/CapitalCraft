@@ -6,10 +6,18 @@ angular.module('starter.services', [])
 })
 
 .factory('Beers', function($firebaseArray) {
-  var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/beers");
   return {
     list: function() {
+      var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/beers");
       return  $firebaseArray(itemsRef);
+    },
+    get : function(beerId) {
+      var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/beers");
+      return itemsRef.child(beerId);
+    },
+    remove : function(beerId) {
+      var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/beers");
+      itemsRef.child(beerId).set(null);
     }
   };
 })

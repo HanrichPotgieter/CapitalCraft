@@ -38,7 +38,9 @@ angular.module('starter.controllers', [])
   $scope.addBeer = function() {
     $state.go('tab.beers-add');
   };
-
+  $scope.remove = function(beerId) {
+    Beers.remove(beerId);
+  };
 })
 
 .controller('BeerDetailCtrl', function($scope, $stateParams, $state, Beers){
