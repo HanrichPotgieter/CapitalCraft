@@ -55,10 +55,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
       views: {
         'tab-mybeers': {
           templateUrl: 'templates/mybeers.html',
-          controller: 'BeerCtrl'
+          controller: 'MyBeerCtrl'
         }
       }
     })
+      .state('tab.mybeers-detail', {
+        url: '/mybeers/:beer',
+        views: {
+          'tab-mybeers': {
+            templateUrl: 'templates/mybeer-detail.html',
+            controller: 'BeerDetailCtrl'
+          }
+        }
+      })    
 
   .state('tab.beers', {
       url: '/beers',
@@ -91,5 +100,4 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/beers');
-
 });

@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AccountCtrl', function($scope, $ionicPopup, $timeout, $state, $ionicLoading, User) {
+.controller('AccountCtrl', function($scope, $ionicPopup, $timeout, $state, $ionicLoading, User, Beers) {
 	$scope.settings = {
 		enableFriends: true
 	};
@@ -48,8 +48,11 @@ $scope.showPopup = function(url,t) {
 			  } else {
 			    console.log("Authenticated successfully with payload:", authData);
 			    User.set(authData);
-          $ionicLoading.hide();
-			    $state.go("tab.beers");
+          Beers.listForUser(User.get().uid, function(res){
+            User.mybeers = res;
+            $state.go("tab.beers");
+            $ionicLoading.hide();
+          });
 			  }
 			});
 		}
@@ -70,6 +73,19 @@ $scope.showPopup = function(url,t) {
 		}
 	});
 };
+})
+
+.controller('MyBeerCtrl', function($scope, $stateParams, $state, $ionicLoading, Beers, User) {
+  
+  $scope.beers = Beers.list();
+  $scope.rated = function(beer) {
+    for (var i in User.mybeers) {
+      if (beer.$id === User.mybeers[i]) {
+        return true;    
+      }
+    }
+    return false;
+  };
 })
 
 .controller('BeerCtrl', function($scope, $stateParams, $state, $ionicLoading, Beers) {
@@ -149,7 +165,7 @@ $scope.showPopup = function(url,t) {
             var user = User.get();
             var ref = new Firebase('https://capitalcraft.firebaseio.com/ratings/'+user.uid+'/'+$scope.beer.$id);
             ref.child('rating').set(res);
-    
+            User.mybeers.push($scope.beer.$id);
             var beer = Beers.get($scope.beer.$id);
             beer.once('value',function(data) {
               var curAvg;

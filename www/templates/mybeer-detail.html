@@ -1,0 +1,18 @@
+<ion-view view-title="{{beer.title}}">
+  <ion-content class="padding">
+    <p>
+      {{beer.description}}<br /><br />
+      Average user rating:
+      <rating ng-model="bate" max="max" readonly="true"></rating>
+      ({{beer.numRates}} users)
+    </p>
+
+  </ion-content>
+
+
+<ion-footer-bar  ng-show="isLoggedIn()">
+  <button class="bar bar-footer bar-positive" ng-click="rate()">
+    <p class="title">Rate this Beer!<p>
+  </button>
+</ion-footer-bar>
+</ion-view>
