@@ -10,7 +10,7 @@
 			 	Logout
 			</button>
 		</br>
-			<button ng-click="showPopup('templates/tab-accounts-register-popup.html', 'Register')" class="button button-block button-light">
+			<button ng-hide="isLoggedOn()" ng-click="showPopup('templates/tab-accounts-register-popup.html', 'Register')" class="button button-block button-light">
 			 	Register
 			</button>
 		</div>
