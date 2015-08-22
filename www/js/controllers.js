@@ -120,8 +120,11 @@ $scope.showPopup = function(url,t) {
   };
 })
 
-.controller('BeerDetailCtrl', function($scope, $stateParams, $state, Beers){
+.controller('BeerDetailCtrl', function($scope, $ionicPopup, $stateParams, $state, Beers, User){
   $scope.beer = JSON.parse($stateParams.beer);
+  $scope.rate = function() {
+    console.log(User.get());
+  };
 })
 
 .controller('BeerAddCtrl',function($scope, $stateParams, $state, Beers) {
