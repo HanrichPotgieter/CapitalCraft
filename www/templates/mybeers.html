@@ -1,0 +1,9 @@
+<ion-view view-title="My Beers">
+  <ion-content>
+	<ion-list>
+	     <ion-item class="item-remove-animate" ng-repeat="beer in beers" type="item-text-wrap" href="#/tab/beers/{{beer}}" style="z-index: 1;">
+	    	{{beer.title}}
+	    </ion-item>
+  	</ion-list>
+  </ion-content>
+</ion-view>
