@@ -123,7 +123,30 @@ $scope.showPopup = function(url,t) {
 .controller('BeerDetailCtrl', function($scope, $ionicPopup, $stateParams, $state, Beers, User){
   $scope.beer = JSON.parse($stateParams.beer);
   $scope.rate = function() {
-    console.log(User.get());
+    $scope.data = {};
+    var myPopup = $ionicPopup.show({
+      template : '<input type="text" ng-model="data.rating">',
+      title : 'Rate ' + $scope.beer.title,
+      subtitle : 'What do you think of ' + $scope.title.beer + '?',
+      scope : $scope,
+      buttons : [
+        {text : 'Cancel'},
+        {
+          text : '<b>Save</b>',
+          type : 'button-positive',
+          onTap: function(e) {
+            if (!$scope.data.rating) {
+              e.preventDefault();
+            } else {
+              return $scope.data.rating;
+            }
+          }
+        }
+      ]
+    });
+    myPopup.then(function(res) {
+    
+    });
   };
 })
 
