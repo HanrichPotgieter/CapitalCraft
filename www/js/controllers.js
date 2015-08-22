@@ -21,7 +21,6 @@ angular.module('starter.controllers', [])
 	$scope.chat = Chats.get($stateParams.chatId);
 })
 
-<<<<<<< HEAD
 .controller('ListCtrl', function($scope, $stateParams, Chats, Items) {
 	$scope.items = Items;
 	$scope.addItem = function() {
@@ -99,19 +98,7 @@ $scope.showPopup = function(url,t) {
 			console.log(res.last);
 		}
 	});
- };
-
-=======
-.controller('ListCtrl', function($scope, $stateParams, Items) {
-  $scope.items = Items;
-  $scope.addItem = function() {
-    var name = prompt("What do you need to buy?");
-    if (name) {
-      $scope.items.$add({
-        "name": name
-      });
-    }
-  };
+};
 })
 
 .controller('BeerCtrl', function($scope, $stateParams, $state, Beers) {
@@ -144,9 +131,9 @@ $scope.showPopup = function(url,t) {
     $state.go('tab.beers');
   };
 })
+
 .controller('AccountCtrl', function($scope) {
   $scope.settings = {
     enableFriends: true
   };
->>>>>>> origin/master
 });
