@@ -7,7 +7,11 @@ angular.module('starter.services', [])
 
 .factory('Beers', function($firebaseArray) {
   var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/beers");
-  return $firebaseArray(itemsRef);
+  return {
+    list: function() {
+      return  $firebaseArray(itemsRef);
+    }
+  };
 })
 
 .factory('Chats', function() {

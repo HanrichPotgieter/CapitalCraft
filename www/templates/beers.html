@@ -1,10 +1,9 @@
 <ion-view view-title="beers">
   <ion-content>
-
 	<ion-list>
-		<button class="button" href="#/tab/beers/add">Add Beer</button>
-	    <ion-item ng-repeat="beer in beerss">
-	      {{beer.name}}
+		<button class="button button-block" ng-click="addBeer()">Add Beer</button>
+	     <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="beer in beers" type="item-text-wrap" href="#/tab/beers/{{beer}}">
+	      {{beer.title}}
 	    </ion-item>
   	</ion-list>
   </ion-content>

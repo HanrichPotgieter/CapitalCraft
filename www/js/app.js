@@ -97,6 +97,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
         }
       }
     })
+    .state('tab.detail', {
+      url: '/beers/:beer',
+      views: {
+        'tab-beers': {
+          templateUrl: 'templates/beer-detail.html',
+          controller: 'BeerDetailCtrl'
+        }
+      }
+    })
     
 
   .state('tab.list', {
