@@ -5,6 +5,27 @@ angular.module('starter.services', [])
   return $firebaseArray(itemsRef);
 })
 
+
+.factory("User", function() {
+  var user = undefined;
+  return {
+    get:function(){
+    return user;
+  },
+    set:function(_user){
+      user = _user;
+  },
+    isLoggedIn:function(){
+      if(user === undefined){
+        return false;
+      }
+      else{
+        return true;
+      }
+     }
+  };
+})
+
 .factory('Beers', function($firebaseArray) {
   return {
     list: function() {
