@@ -21,7 +21,7 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('ListCtrl', function($scope, $stateParams, Chats, Items) {
+.controller('ListCtrl', function($scope, $stateParams, Items) {
   $scope.items = Items;
   $scope.addItem = function() {
     var name = prompt("What do you need to buy?");
@@ -33,6 +33,19 @@ angular.module('starter.controllers', [])
   };
 })
 
+.controller('BeerCtrl', function($scope, $stateParams, Beers) {
+  $scope.beers = Beers;
+
+})
+.controller('BeerAddCtrl',function($scope, $stateParams, Beers) {
+  $scope.beers = Beers;
+  $scope.addBeer = function(title,price) {
+    $scope.beers.$add({
+      'title' : title,
+      'price' : price
+    });
+  };
+})
 .controller('AccountCtrl', function($scope) {
   $scope.settings = {
     enableFriends: true
