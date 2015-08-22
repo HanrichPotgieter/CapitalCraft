@@ -121,6 +121,11 @@ $scope.showPopup = function(url,t) {
 
 .controller('BeerDetailCtrl', function($scope, $ionicPopup, $stateParams, $state, Beers, User){
   $scope.beer = JSON.parse($stateParams.beer);
+
+  $scope.isLoggedIn = function() {
+    return User.isLoggedIn();
+  };
+
   $scope.rate = function() {
     $scope.data = {};
     canceled = false;
