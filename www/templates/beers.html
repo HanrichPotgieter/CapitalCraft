@@ -4,7 +4,7 @@
 	<ion-list show-delete="false">
 	     <ion-item class="item-remove-animate" ng-repeat="beer in beers" type="item-text-wrap" href="#/tab/beers/{{beer}}" style="z-index: 1;">
 	    	{{beer.title}}
-        <ion-option-button class="button-assertive" ng-click="remove(beer.$id)" ng-disabled="true">
+        <ion-option-button class="button-assertive" ng-click="remove(beer.$id)" ng-show="false">
           Delete
         </ion-option-button>
 	    </ion-item>
