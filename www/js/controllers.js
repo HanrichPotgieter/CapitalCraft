@@ -149,7 +149,7 @@ $scope.showPopup = function(url,t) {
       ref.child('rating').set(res);
 
       var beer = Beers.get($scope.beer.$id);
-      console.log(beer.child('title'));
+      beer.child('avgRating').set(res);
     });
   };
 })
