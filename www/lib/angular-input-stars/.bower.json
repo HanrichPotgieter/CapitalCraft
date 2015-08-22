@@ -1,0 +1,32 @@
+{
+  "name": "angular-input-stars-directive",
+  "description": "AngularJS directive for rating inputs",
+  "keywords": [
+    "angularjs",
+    "directive",
+    "input",
+    "stars",
+    "rating"
+  ],
+  "main": [
+    "angular-input-stars.js"
+  ],
+  "dependencies": {
+    "angular": "1.3.x",
+    "font-awesome": "~4.2.0"
+  },
+  "ignore": [
+    "readme.md"
+  ],
+  "homepage": "https://github.com/rcbytes/angular-input-stars",
+  "_release": "20e9c5a269",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "20e9c5a269cf77442e2ca7110b37f3f1385af5fb"
+  },
+  "_source": "git://github.com/rcbytes/angular-input-stars.git",
+  "_target": "*",
+  "_originalSource": "angular-input-stars",
+  "_direct": true
+}

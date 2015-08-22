@@ -6,6 +6,10 @@
   },
   "dependencies": {
     "firebase": "~2.2.9",
-    "angularfire": "~1.1.2"
+    "angularfire": "~1.1.2",
+    "angular-input-stars": "*"
+  },
+  "resolutions": {
+    "angular": ">= 1.0.8"
   }
 }
