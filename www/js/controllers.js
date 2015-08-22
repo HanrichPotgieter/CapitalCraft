@@ -111,11 +111,13 @@ $scope.showPopup = function(url,t) {
   $scope.rate = function() {
     $scope.data = {};
     canceled = false;
+    var oldRating = null;
     var ref = new Firebase('https://capitalcraft.firebaseio.com/ratings/'+User.get().uid+'/'+$scope.beer.$id);
     ref.child('rating');
     ref.once('value', function(rating){
       if (rating.val() !== null) {
         $scope.data.rating = rating.val().rating;
+        oldRating = $scope.data.rating;
       }
       var myPopup = $ionicPopup.show({
         template : '<rating ng-model="data.rating" max="max" style="font-size:10px;!important"></rating>',
@@ -150,10 +152,18 @@ $scope.showPopup = function(url,t) {
     
             var beer = Beers.get($scope.beer.$id);
             beer.once('value',function(data) {
-              var curAvg = data.val().avgRating * parseInt(data.val().numRates);
-              var newAvg = (curAvg + parseInt(res)) / (parseInt(data.val().numRates) + 1);
-              beer.child('avgRating').set(newAvg);
-              beer.child('numRates').set(parseInt(data.val().numRates) + 1);
+              var curAvg;
+              var newAvg;
+              if (oldRating !== null) {
+                curAvg = data.val().avgRating * parseInt(data.val().numRates) - oldRating;
+                newAvg = (curAvg + parseInt(res)) / (parseInt(data.val().numRates));
+                beer.child('avgRating').set(newAvg);
+              } else {
+                curAvg = data.val().avgRating * parseInt(data.val().numRates);
+                newAvg = (curAvg + parseInt(res)) / (parseInt(data.val().numRates) + 1);
+                beer.child('avgRating').set(newAvg);
+                beer.child('numRates').set(parseInt(data.val().numRates) + 1);
+              }
             });
           }
       });  
