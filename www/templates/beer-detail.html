@@ -2,8 +2,9 @@
   <ion-content class="padding">
     <p>
       {{beer.description}}<br /><br />
-      Average user rating: {{beer.avgRating}} ({{beer.numRates}} users)
-    	<rating ng-model="rate" max="max"></rating>
+      Average user rating:
+      <rating ng-model="bate" max="max" readonly="true"></rating>
+      ({{beer.numRates}} users)
     </p>
 
   </ion-content>
