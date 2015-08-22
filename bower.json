@@ -7,7 +7,7 @@
   "dependencies": {
     "firebase": "~2.2.9",
     "angularfire": "~1.1.2",
-    "angular-input-stars": "*"
+    "ionic-rating": "~0.1.0"
   },
   "resolutions": {
     "angular": ">= 1.0.8"
