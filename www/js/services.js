@@ -26,13 +26,14 @@ angular.module('starter.services', [])
   };
 })
 
-.factory("Ratings", function() {
+.factory("Ratings", function($firebaseArray) {
   return {
     get:function(){
     return rating;
   },
     list: function(id) {
-      var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/ratings" + id);
+      var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/ratings/" + id);
+      console.log(itemsRef);
       return  $firebaseArray(itemsRef);
     },
     set:function(_rating){

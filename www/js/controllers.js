@@ -39,7 +39,6 @@ angular.module('starter.controllers', [])
 	};
 
 	$scope.isLoggedOn = User.isLoggedIn;
-	$scope.isNotLoggedOn = User.isNotLoggedIn;
 
 $scope.logout = function(){
 		User.set(undefined);
@@ -108,6 +107,12 @@ $scope.showPopup = function(url,t) {
     }
   };
 })
+
+.controller('myBeersCtrl', function($scope, Ratings, User) {
+	$scope.loggedIn = User.isLoggedIn;
+	$scope.mybeers = Ratings.list(User.uid);
+})
+
 
 .controller('BeerCtrl', function($scope, $stateParams, $state, Beers) {
   $scope.beers = Beers.list();
