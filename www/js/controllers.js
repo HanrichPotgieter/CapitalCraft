@@ -64,8 +64,26 @@ $scope.showPopup = function(url,t) {
 };
 })
 
-.controller('BeerCtrl', function($scope, $stateParams, $state, Beers) {
+.controller('BeerCtrl', function($scope, $stateParams, $state, $ionicLoading, Beers) {
   $scope.beers = Beers.list();
+
+  $ionicLoading.show({
+    content: 'Loading',
+    animation: 'fade-in',
+    showBackdrop: true,
+    maxWidth: 200,
+    showDelay: 0
+  });
+
+  $scope.beers.$loaded()
+    .then(function() {
+      $ionicLoading.hide();
+    });
+
+  // if ($scope.beers) {
+  //   $ionicLoading.hide();
+  // }
+
   $scope.addBeer = function() {
     $state.go('tab.beers-add');
   };

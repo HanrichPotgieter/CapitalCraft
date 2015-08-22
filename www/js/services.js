@@ -41,6 +41,7 @@ angular.module('starter.services', [])
     list: function() {
       var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/beers");
       return  $firebaseArray(itemsRef.orderByChild("manufacturer"));
+      
     },
     get : function(beerId) {
       var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/beers/"+beerId);
