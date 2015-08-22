@@ -40,15 +40,14 @@ angular.module('starter.controllers', [])
 
 	$scope.isLoggedOn = User.isLoggedIn;
 	$scope.isNotLoggedOn = User.isNotLoggedIn;
-	
+	console.log("hello");
 $scope.logout = function(){
 		User.set(undefined);
 		console.log(User.get());
 };
 
 $scope.showPopup = function(url,t) {
-	$scope.data = {}
-
+	$scope.data = {};
 	// An elaborate, custom popup
 	var myPopup = $ionicPopup.show({
 		templateUrl: url,
@@ -65,8 +64,7 @@ $scope.showPopup = function(url,t) {
 			}
 		]
 	}).then(function(res) {
-		if(!res.first)
-		{
+		if(!res.first){
 			var ref = new Firebase("https://capitalcraft.firebaseio.com");
 			ref.authWithPassword({
 			  email    : res.email,
@@ -81,8 +79,7 @@ $scope.showPopup = function(url,t) {
 			  }
 			});
 		}
-		else
-		{
+		else{
 			var ref = new Firebase("https://capitalcraft.firebaseio.com");
 			ref.createUser({
 			  email    : res.email,
@@ -129,11 +126,5 @@ $scope.showPopup = function(url,t) {
     $scope.beer.price = 0.0;
     $scope.beer.description = '';
     $state.go('tab.beers');
-  };
-})
-
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
   };
 });
