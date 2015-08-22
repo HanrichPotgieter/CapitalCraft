@@ -40,7 +40,7 @@ angular.module('starter.controllers', [])
 
 	$scope.isLoggedOn = User.isLoggedIn;
 	$scope.isNotLoggedOn = User.isNotLoggedIn;
-	console.log("hello");
+
 $scope.logout = function(){
 		User.set(undefined);
 		console.log(User.get());
@@ -98,6 +98,18 @@ $scope.showPopup = function(url,t) {
 };
 })
 
+.controller('ListCtrl', function($scope, $stateParams, Items) {
+  $scope.items = Items;
+  $scope.addItem = function() {
+    var name = prompt("What do you need to buy?");
+    if (name) {
+      $scope.items.$add({
+        "name": name
+      });
+    }
+  };
+})
+
 .controller('BeerCtrl', function($scope, $stateParams, $state, Beers) {
   $scope.beers = Beers.list();
   $scope.addBeer = function() {
@@ -128,3 +140,4 @@ $scope.showPopup = function(url,t) {
     $state.go('tab.beers');
   };
 });
+
