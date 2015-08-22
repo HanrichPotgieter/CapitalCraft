@@ -123,13 +123,19 @@ $scope.showPopup = function(url,t) {
   $scope.beer = JSON.parse($stateParams.beer);
   $scope.rate = function() {
     $scope.data = {};
+    canceled = false;
     var myPopup = $ionicPopup.show({
       template : '<input type="text" ng-model="data.rating">',
       title : 'Rate ' + $scope.beer.title,
       subtitle : 'What do you think of ' + $scope.title.beer + '?',
       scope : $scope,
       buttons : [
-        {text : 'Cancel'},
+        {
+          text : 'Cancel',
+          onTap : function(e) {
+            canceled = true;
+          }
+        },
         {
           text : '<b>Save</b>',
           type : 'button-positive',
@@ -144,12 +150,19 @@ $scope.showPopup = function(url,t) {
       ]
     });
     myPopup.then(function(res) {
-      var user = User.get();
-      var ref = new Firebase('https://capitalcraft.firebaseio.com/ratings/'+user.uid+'/'+$scope.beer.$id);
-      ref.child('rating').set(res);
-
-      var beer = Beers.get($scope.beer.$id);
-      beer.child('avgRating').set(res);
+      if (canceled !== true) {
+          var user = User.get();
+          var ref = new Firebase('https://capitalcraft.firebaseio.com/ratings/'+user.uid+'/'+$scope.beer.$id);
+          ref.child('rating').set(res);
+  
+          var beer = Beers.get($scope.beer.$id);
+          beer.once('value',function(data) {
+            var curAvg = data.val().avgRating * parseInt(data.val().numRates);
+            var newAvg = (curAvg + parseInt(res)) / (parseInt(data.val().numRates) + 1);
+            beer.child('avgRating').set(newAvg);
+            beer.child('numRates').set(parseInt(data.val().numRates) + 1);
+          });
+        }
     });
   };
 })
