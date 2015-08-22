@@ -75,7 +75,7 @@ $scope.showPopup = function(url,t) {
 			  } else {
 			    console.log("Authenticated successfully with payload:", authData);
 			    User.set(authData);
-			    $state.go("tab.account");
+			    $state.go("tab.beers");
 			  }
 			});
 		}
