@@ -178,11 +178,13 @@ $scope.showPopup = function(url,t) {
   $scope.beer.avgRating = 0.0;
   $scope.addBeer = function() {
     $scope.beers.$add({
+      'manufacturer' : $scope.beer.manufacturer,
       'title' : $scope.beer.title,
       'avgRating' : parseFloat($scope.beer.avgRating).toFixed(2),
       'numRates' : parseInt(0),
       'description' : $scope.beer.description
     });
+    $scope.beer.manufacturer = '';
     $scope.beer.title = '';
     $scope.beer.avgRating = 0.0;
     $scope.beer.description = '';
