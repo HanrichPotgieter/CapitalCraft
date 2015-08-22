@@ -43,7 +43,6 @@ angular.module('starter.controllers', [])
 
 $scope.logout = function(){
 		User.set(undefined);
-		console.log(User.get());
 };
 
 $scope.showPopup = function(url,t) {
@@ -145,7 +144,12 @@ $scope.showPopup = function(url,t) {
       ]
     });
     myPopup.then(function(res) {
-    
+      var user = User.get();
+      var ref = new Firebase('https://capitalcraft.firebaseio.com/ratings/'+user.uid);
+      ref.push({
+        'beerId' : $scope.beer.$id,
+        'rating':res
+      });
     });
   };
 })
