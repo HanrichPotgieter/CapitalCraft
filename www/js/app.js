@@ -79,6 +79,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
     }
   })
 
+  .state('tab.mybeers', {
+      url: '/mybeers',
+      views: {
+        'tab-mybeers': {
+          templateUrl: 'templates/mybeers.html',
+          controller: 'BeerCtrl'
+        }
+      }
+    })
+
   .state('tab.beers', {
       url: '/beers',
       views: {
@@ -106,7 +116,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
         }
       }
     })
-    
 
   .state('tab.list', {
     url: '/list',

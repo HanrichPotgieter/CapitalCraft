@@ -26,6 +26,26 @@ angular.module('starter.services', [])
   };
 })
 
+.factory("Ratings", function() {
+  var rating = undefined;
+  return {
+    get:function(){
+    return rating;
+  },
+    set:function(_rating){
+      rating = _rating;
+  },
+    isRated:function(){
+      if(rating === undefined){
+        return false;
+      }
+      else{
+        return true;
+      }
+     }
+  };
+})
+
 .factory('Beers', function($firebaseArray) {
   return {
     list: function() {
