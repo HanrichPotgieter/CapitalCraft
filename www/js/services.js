@@ -27,23 +27,19 @@ angular.module('starter.services', [])
 })
 
 .factory("Ratings", function() {
-  var rating = undefined;
   return {
     get:function(){
     return rating;
   },
+    list: function(id) {
+      var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/ratings" + id);
+      return  $firebaseArray(itemsRef);
+    },
     set:function(_rating){
+      //die werk nie
       rating = _rating;
-  },
-    isRated:function(){
-      if(rating === undefined){
-        return false;
-      }
-      else{
-        return true;
-      }
-     }
-  };
+  }
+ };
 })
 
 .factory('Beers', function($firebaseArray) {
