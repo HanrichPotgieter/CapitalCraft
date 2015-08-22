@@ -75,8 +75,11 @@ $scope.showPopup = function(url,t) {
 })
 
 .controller('MyBeerCtrl', function($scope, $stateParams, $state, $ionicLoading, Beers, User) {
-  
+  $scope.isLoggedOn = User.isLoggedIn;
   $scope.beers = Beers.list();
+  $scope.loginOrRegister = function() {
+  	$state.go("tab.account");
+  }
   $scope.rated = function(beer) {
     for (var i in User.mybeers) {
       if (beer.$id === User.mybeers[i]) {
