@@ -145,11 +145,11 @@ $scope.showPopup = function(url,t) {
     });
     myPopup.then(function(res) {
       var user = User.get();
-      var ref = new Firebase('https://capitalcraft.firebaseio.com/ratings/'+user.uid);
-      ref.push({
-        'beerId' : $scope.beer.$id,
-        'rating':res
-      });
+      var ref = new Firebase('https://capitalcraft.firebaseio.com/ratings/'+user.uid+'/'+$scope.beer.$id);
+      ref.child('rating').set(res);
+
+      var beer = Beers.get($scope.beer.$id);
+      beer.child('avgRating').set(res);
     });
   };
 })
@@ -157,15 +157,16 @@ $scope.showPopup = function(url,t) {
 .controller('BeerAddCtrl',function($scope, $stateParams, $state, Beers) {
   $scope.beers = Beers.list();
   $scope.beer = Object;
-  $scope.beer.price = 0.0;
+  $scope.beer.avgRating = 0.0;
   $scope.addBeer = function() {
     $scope.beers.$add({
       'title' : $scope.beer.title,
-      'price' : parseFloat($scope.beer.price).toFixed(2),
+      'avgRating' : parseFloat($scope.beer.avgRating).toFixed(2),
+      'numRates' : parseInt(0),
       'description' : $scope.beer.description
     });
     $scope.beer.title = '';
-    $scope.beer.price = 0.0;
+    $scope.beer.avgRating = 0.0;
     $scope.beer.description = '';
     $state.go('tab.beers');
   };
