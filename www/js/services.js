@@ -44,6 +44,26 @@ angular.module('starter.services', [])
       return  $firebaseArray(itemsRef.orderByChild("manufacturer"));
       
     },
+    listForUser : function(uid, callback) {
+      var returnThis = [];
+      var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/ratings/"+uid);
+      itemsRef.once('value', function(data) {
+        var beers = data.val();
+        
+        for (var property in beers) {
+          if (beers.hasOwnProperty(property)) {
+              var beer = new Firebase("https://capitalcraft.firebaseio.com/beers/"+property);
+              // beer.once('value', function(value) {
+              //   returnThis.push(value.val());
+              // });
+              returnThis.push(property);
+          }
+        }
+        
+        // return returnThis;
+        callback(returnThis);
+      });
+    },
     get : function(beerId) {
       var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/beers/"+beerId);
       return itemsRef;
