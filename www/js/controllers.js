@@ -21,6 +21,7 @@ angular.module('starter.controllers', [])
 	$scope.chat = Chats.get($stateParams.chatId);
 })
 
+<<<<<<< HEAD
 .controller('ListCtrl', function($scope, $stateParams, Chats, Items) {
 	$scope.items = Items;
 	$scope.addItem = function() {
@@ -100,4 +101,52 @@ $scope.showPopup = function(url,t) {
 	});
  };
 
+=======
+.controller('ListCtrl', function($scope, $stateParams, Items) {
+  $scope.items = Items;
+  $scope.addItem = function() {
+    var name = prompt("What do you need to buy?");
+    if (name) {
+      $scope.items.$add({
+        "name": name
+      });
+    }
+  };
+})
+
+.controller('BeerCtrl', function($scope, $stateParams, $state, Beers) {
+  $scope.beers = Beers.list();
+  $scope.addBeer = function() {
+    $state.go('tab.beers-add');
+  };
+  $scope.remove = function(beerId) {
+    Beers.remove(beerId);
+  };
+})
+
+.controller('BeerDetailCtrl', function($scope, $stateParams, $state, Beers){
+  $scope.beer = JSON.parse($stateParams.beer);
+})
+
+.controller('BeerAddCtrl',function($scope, $stateParams, $state, Beers) {
+  $scope.beers = Beers.list();
+  $scope.beer = Object;
+  $scope.beer.price = 0.0;
+  $scope.addBeer = function() {
+    $scope.beers.$add({
+      'title' : $scope.beer.title,
+      'price' : parseFloat($scope.beer.price).toFixed(2),
+      'description' : $scope.beer.description
+    });
+    $scope.beer.title = '';
+    $scope.beer.price = 0.0;
+    $scope.beer.description = '';
+    $state.go('tab.beers');
+  };
+})
+.controller('AccountCtrl', function($scope) {
+  $scope.settings = {
+    enableFriends: true
+  };
+>>>>>>> origin/master
 });

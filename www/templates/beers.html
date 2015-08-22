@@ -1,0 +1,13 @@
+<ion-view view-title="beers">
+  <ion-content>
+  <button class="button button-block" ng-click="addBeer()">Add Beer</button>
+	<ion-list show-delete="false">
+	     <ion-item class="item-remove-animate" ng-repeat="beer in beers" type="item-text-wrap" href="#/tab/beers/{{beer}}" style="z-index: 1;">
+	    	{{beer.title}}
+        <ion-option-button class="button-assertive" ng-click="remove(beer.$id)">
+          Delete
+        </ion-option-button>
+	    </ion-item>
+  	</ion-list>
+  </ion-content>
+</ion-view>

@@ -1,9 +1,10 @@
 angular.module('starter.services', [])
 
-.factory("Items", function($firebaseArray) {
+.factory('Items', function($firebaseArray) {
   var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/items");
   return $firebaseArray(itemsRef);
 })
+
 
 .factory("User", function() {
   var user = undefined;
@@ -21,6 +22,23 @@ angular.module('starter.services', [])
       else{
         return true;
       }
+     }
+  };
+})
+
+.factory('Beers', function($firebaseArray) {
+  return {
+    list: function() {
+      var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/beers");
+      return  $firebaseArray(itemsRef);
+    },
+    get : function(beerId) {
+      var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/beers");
+      return itemsRef.child(beerId);
+    },
+    remove : function(beerId) {
+      var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/beers");
+      itemsRef.child(beerId).set(null);
     }
   };
 })
