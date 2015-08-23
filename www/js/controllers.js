@@ -31,6 +31,7 @@ $scope.showPopup = function(url,t) {
 	}).then(function(res) {
 		if(!res.first){
       $ionicLoading.show({
+      	template: '<ion-spinner icon=\"ripple\"></ion-spinner>',
         content: 'Loading',
         animation: 'fade-in',
         showBackdrop: true,
