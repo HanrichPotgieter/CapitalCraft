@@ -94,6 +94,7 @@ $scope.showPopup = function(url,t) {
   $scope.beers = Beers.list();
 
   $ionicLoading.show({
+  	template: '<ion-spinner icon=\"ripple\"></ion-spinner>',
     content: 'Loading',
     animation: 'fade-in',
     showBackdrop: true,
@@ -101,7 +102,7 @@ $scope.showPopup = function(url,t) {
     showDelay: 0
   });
 
-  $scope.beers.$loaded()
+  $scope.beers.$loaded()	
     .then(function() {
       $ionicLoading.hide();
     });
@@ -183,9 +184,18 @@ $scope.showPopup = function(url,t) {
                 beer.child('numRates').set(parseInt(data.val().numRates) + 1);
               }
             });
+            var alertPopup = $ionicPopup.alert({
+				     title: 'Rating',
+				     template: 'Thank you for rating our beer. Your rating has been added!'
+				   });
+				   alertPopup.then(function(res) {
+				    	$state.go("tab.beers");
+				   });
           }
       });  
     });
+
+		
     
   };
 })
