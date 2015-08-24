@@ -38,7 +38,7 @@ $scope.showPopup = function(url,t) {
         maxWidth: 200,
         showDelay: 0
       });
-			var ref = new Firebase("https://capitalcraft.firebaseio.com");
+			var ref = window.localStorage['firebase'] || new Firebase("https://capitalcraft.firebaseio.com");
 			ref.authWithPassword({
 			  email    : res.email,
 			  password : res.password
@@ -57,7 +57,7 @@ $scope.showPopup = function(url,t) {
 			});
 		}
 		else{
-			var ref = new Firebase("https://capitalcraft.firebaseio.com");
+			var ref = window.localStorage['firebase'] || new Firebase("https://capitalcraft.firebaseio.com");
 			ref.createUser({
 			  email    : res.email,
 			  password : res.password
@@ -132,7 +132,7 @@ $scope.showPopup = function(url,t) {
     $scope.data = {};
     canceled = false;
     var oldRating = null;
-    var ref = new Firebase('https://capitalcraft.firebaseio.com/ratings/'+User.get().uid+'/'+$scope.beer.$id);
+    var ref = window.localStorage['firebaseRatingUid'] ||  new Firebase('https://capitalcraft.firebaseio.com/ratings/'+User.get().uid+'/'+$scope.beer.$id);
     ref.child('rating');
     ref.once('value', function(rating){
       if (rating.val() !== null) {
@@ -167,7 +167,7 @@ $scope.showPopup = function(url,t) {
       myPopup.then(function(res) {
         if (canceled !== true) {
             var user = User.get();
-            var ref = new Firebase('https://capitalcraft.firebaseio.com/ratings/'+user.uid+'/'+$scope.beer.$id);
+            var ref = window.localStorage['firebaseRatingUid'] || new Firebase('https://capitalcraft.firebaseio.com/ratings/'+user.uid+'/'+$scope.beer.$id);
             ref.child('rating').set(res);
             User.mybeers.push($scope.beer.$id);
             var beer = Beers.get($scope.beer.$id);

@@ -26,7 +26,7 @@ angular.module('starter.services', [])
     return rating;
   },
     list: function(id) {
-      var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/ratings/" + id);
+      var itemsRef = window.localStorage['ratingsId'] ||  new Firebase("https://capitalcraft.firebaseio.com/ratings/" + id);
       console.log(itemsRef);
       return  $firebaseArray(itemsRef);
     },
@@ -40,19 +40,19 @@ angular.module('starter.services', [])
 .factory('Beers', function($firebaseArray) {
   return {
     list: function() {
-      var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/beers");
+      var itemsRef = window.localStorage['beers'] || new Firebase("https://capitalcraft.firebaseio.com/beers");
       return  $firebaseArray(itemsRef.orderByChild("manufacturer"));
       
     },
     listForUser : function(uid, callback) {
       var returnThis = [];
-      var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/ratings/"+uid);
+      var itemsRef = window.localStorage['ratingsUid'] || new Firebase("https://capitalcraft.firebaseio.com/ratings/"+uid);
       itemsRef.once('value', function(data) {
         var beers = data.val();
         
         for (var property in beers) {
           if (beers.hasOwnProperty(property)) {
-              var beer = new Firebase("https://capitalcraft.firebaseio.com/beers/"+property);
+              var beer = window.localStorage['beersProperty'] || new Firebase("https://capitalcraft.firebaseio.com/beers/"+property);
               // beer.once('value', function(value) {
               //   returnThis.push(value.val());
               // });
@@ -65,11 +65,11 @@ angular.module('starter.services', [])
       });
     },
     get : function(beerId) {
-      var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/beers/"+beerId);
+      var itemsRef = window.localStorage['beerID'] ||  new Firebase("https://capitalcraft.firebaseio.com/beers/"+beerId);
       return itemsRef;
     },
     remove : function(beerId) {
-      var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/beers");
+      var itemsRef = window.localStorage['beers'] || new Firebase("https://capitalcraft.firebaseio.com/beers");
       itemsRef.child(beerId).set(null);
     }
   };
