@@ -1,16 +1,18 @@
 angular.module('starter.services', [])
 
 .factory("User", function() {
-  var user = undefined;
+  var user =  window.localStorage['currentUser'] || 'No User';
+  console.log(user);
   return {
     get:function(){
     return user;
   },
     set:function(_user){
       user = _user;
+      window.localStorage['currentUser'] = user;
   },
     isLoggedIn:function(){
-      if(user === undefined){
+      if(user === 'No User'){
         return false;
       }
       else{

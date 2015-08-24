@@ -8,7 +8,7 @@ angular.module('starter.controllers', [])
 	$scope.isLoggedOn = User.isLoggedIn;
 
 $scope.logout = function(){
-		User.set(undefined);
+		User.set('No User');
 };
 
 $scope.showPopup = function(url,t) {
@@ -134,7 +134,7 @@ $scope.showPopup = function(url,t) {
       showDelay: 0
     });
     var oldRating = null;
-    var ref = window.localStorage['firebaseRatingUid'] ||  new Firebase('https://capitalcraft.firebaseio.com/ratings/'+User.get().uid+'/'+$scope.beer.$id);
+    var res = window.localStorage['firebaseRatingUid'] ||  new Firebase('https://capitalcraft.firebaseio.com/ratings/'+User.get().uid+'/'+$scope.beer.$id);
       $scope.data = {};
       canceled = false;
       $ionicLoading.hide();
@@ -193,8 +193,7 @@ $scope.showPopup = function(url,t) {
             });
           }
       });
-    });
-  };
+    };
 })
 
 .controller('BeerAddCtrl',function($scope, $stateParams, $state, Beers) {
