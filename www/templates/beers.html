@@ -2,8 +2,10 @@
   <ion-content>
   <button class="button button-block" ng-click="addBeer()">Add Beer</button>
 	<ion-list show-delete="false">
-	     <ion-item class="item-remove-animate" ng-repeat="beer in beers" type="item-text-wrap" href="#/tab/beers/{{beer}}" style="z-index: 1;">
-	    	{{beer.manufacturer}}: {{beer.title}}
+	     <ion-item class="item-remove-animate item-thumbnail-left" ng-repeat="beer in beers" type="item-text-wrap" href="#/tab/beers/{{beer}}" style="z-index: 1;">
+              <img src="../img/ionic.png">
+              <h2>{{beer.manufacturer}} : {{beer.title}}</h2>
+              <p>{{beer.description}}</p>
         <ion-option-button class="button-assertive" ng-click="remove(beer.$id)" ng-show="true">
           Delete
         </ion-option-button>
