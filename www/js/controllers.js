@@ -80,7 +80,7 @@ $scope.showPopup = function(url,t) {
   $scope.beers = Beers.list();
   $scope.loginOrRegister = function() {
   	$state.go("tab.account");
-  }
+  };
   $scope.rated = function(beer) {
     for (var i in User.mybeers) {
       if (beer.$id === User.mybeers[i]) {
@@ -108,10 +108,6 @@ $scope.showPopup = function(url,t) {
       $ionicLoading.hide();
     });
 
-  // if ($scope.beers) {
-  //   $ionicLoading.hide();
-  // }
-
   $scope.addBeer = function() {
     $state.go('tab.beers-add');
   };
@@ -120,7 +116,7 @@ $scope.showPopup = function(url,t) {
   };
 })
 
-.controller('BeerDetailCtrl', function($scope, $ionicPopup, $stateParams, $state, Beers, User){
+.controller('BeerDetailCtrl', function($scope, $ionicPopup, $stateParams, $state, $ionicLoading, Beers, User){
   $scope.beer = JSON.parse($stateParams.beer);
   $scope.bate = $scope.beer.avgRating;
   $scope.max = 10;
@@ -129,17 +125,24 @@ $scope.showPopup = function(url,t) {
   };
 
   $scope.rate = function() {
-    $scope.data = {};
-    canceled = false;
+      $ionicLoading.show({
+      template: '<ion-spinner icon=\"ripple\"></ion-spinner>',
+      content: 'Loading',
+      animation: 'fade-in',
+      showBackdrop: true,
+      maxWidth: 200,
+      showDelay: 0
+    });
     var oldRating = null;
     var ref = window.localStorage['firebaseRatingUid'] ||  new Firebase('https://capitalcraft.firebaseio.com/ratings/'+User.get().uid+'/'+$scope.beer.$id);
-    ref.child('rating');
-    ref.once('value', function(rating){
-      if (rating.val() !== null) {
-        $scope.data.rating = rating.val().rating;
+      $scope.data = {};
+      canceled = false;
+      $ionicLoading.hide();
+      if (res !== null) {
+        $scope.data.rating = res;
         oldRating = $scope.data.rating;
       }
-      var myPopup = $ionicPopup.show({
+        var myPopup = $ionicPopup.show({
         template : '<rating ng-model="data.rating" max="max" style="font-size:10px;!important"></rating>',
         title : 'Rate ' + $scope.beer.title,
         subtitle : 'What do you think of ' + $scope.title.beer + '?',
@@ -178,26 +181,19 @@ $scope.showPopup = function(url,t) {
                 curAvg = data.val().avgRating * parseInt(data.val().numRates) - oldRating;
                 newAvg = (curAvg + parseInt(res)) / (parseInt(data.val().numRates));
                 beer.child('avgRating').set(newAvg);
+                $scope.bate = newAvg;
               } else {
                 curAvg = data.val().avgRating * parseInt(data.val().numRates);
                 newAvg = (curAvg + parseInt(res)) / (parseInt(data.val().numRates) + 1);
                 beer.child('avgRating').set(newAvg);
                 beer.child('numRates').set(parseInt(data.val().numRates) + 1);
+                $scope.bate = newAvg;
+                $scope.beer.numRates = parseInt(data.val().numRates) + 1;
               }
             });
-            var alertPopup = $ionicPopup.alert({
-				     title: 'Rating',
-				     template: 'Thank you for rating our beer. Your rating has been added!'
-				   });
-				   alertPopup.then(function(res) {
-				    	$state.go("tab.beers");
-				   });
           }
-      });  
+      });
     });
-
-		
-    
   };
 })
 
