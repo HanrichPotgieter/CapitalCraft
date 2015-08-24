@@ -1,9 +1,9 @@
 <ion-view view-title="My Beers">
   <ion-content>
 	<ion-list ng-show="isLoggedOn()">
-	     <ion-item class="item-remove-animate item-thumbnail-left" ng-repeat="beer in beers" type="item-text-wrap" href="#/tab/beers/{{beer}}" style="z-index: 1;">
+	     <ion-item class="item-remove-animate item-thumbnail-left" ng-repeat="beer in beers" type="item-text-wrap" href="#/tab/mybeers/{{beer}}" style="z-index: 1;">
               <img src="../img/ionic.png">
-              <h2>{{beer.manufacturer}} : {{beer.title}}</h2>
+              <h2><b>{{beer.manufacturer}}</b> : {{beer.title}}</h2>
               <p>{{beer.description}}</p>
         <ion-option-button class="button-assertive" ng-click="remove(beer.$id)" ng-show="true">
           Delete
