@@ -38,39 +38,41 @@ angular.module('starter.services', [])
 })
 
 .factory('Beers', function($firebaseArray) {
+  var beers = new Firebase("https://capitalcraft.firebaseio.com/beers");
+  var ratings = new Firebase("https://capitalcraft.firebaseio.com/ratings");
   return {
     list: function() {
-      var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/beers");
-      return  $firebaseArray(itemsRef.orderByChild("manufacturer"));
+      return  $firebaseArray(beers.orderByChild("manufacturer"));
       
     },
     listForUser : function(uid, callback) {
       var returnThis = [];
-      var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/ratings/"+uid);
-      itemsRef.once('value', function(data) {
-        var beers = data.val();
-        
-        for (var property in beers) {
-          if (beers.hasOwnProperty(property)) {
-              var beer = new Firebase("https://capitalcraft.firebaseio.com/beers/"+property);
-              // beer.once('value', function(value) {
-              //   returnThis.push(value.val());
-              // });
+      ratings.once('value', function(data) {
+        var tmp = data.val()[uid];
+        for (var property in tmp) {
+          if (tmp.hasOwnProperty(property)) {
               returnThis.push(property);
           }
         }
-        
-        // return returnThis;
         callback(returnThis);
       });
     },
+    getBeerRating : function(uid, beerId, callback) {
+      ratings.once('value', function(data) {
+        var tmp = data.val()[uid][beerId];
+        if (tmp === undefined) {
+          callback(null);  
+        } else {
+          callback(tmp.rating);
+        }
+        
+      });
+    },
     get : function(beerId) {
-      var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/beers/"+beerId);
-      return itemsRef;
+      return beers.child(beerId);
     },
     remove : function(beerId) {
-      var itemsRef = new Firebase("https://capitalcraft.firebaseio.com/beers");
-      itemsRef.child(beerId).set(null);
+      beers.child(beerId).set(null);
     }
   };
 });

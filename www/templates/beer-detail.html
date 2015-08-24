@@ -6,12 +6,11 @@
       <rating ng-model="bate" max="max" readonly="true"></rating>
       ({{beer.numRates}} users)
     </p>
-
   </ion-content>
 
 
 <ion-footer-bar  ng-show="isLoggedIn()">
-  <button class="bar bar-footer bar-positive" ng-click="rate()">
+  <button class="bar bar-footer bar-positive" ng-click="rate()" style="z-index: 1;">
     <p class="title">Rate this Beer!<p>
   </button>
 </ion-footer-bar>
