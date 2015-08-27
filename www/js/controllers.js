@@ -45,6 +45,17 @@ $scope.showPopup = function(url,t) {
 			}, function(error, authData) {
 			  if (error) {
 			    console.log("Login Failed!", error);
+         $state.go("tab.account");
+         $ionicLoading.hide();
+         $scope.showAlert = function() {
+           var alertPopup = $ionicPopup.alert({
+             title: 'Login failed',
+             template: 'Could not log in: User authentication failed.'
+           });
+           alertPopup.then(function(res) {
+             console.log('Notified.');
+           });
+         };
 			  } else {
 			    console.log("Authenticated successfully with payload:", authData);
 			    User.set(authData);
